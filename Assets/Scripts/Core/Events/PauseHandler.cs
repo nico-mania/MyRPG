@@ -1,3 +1,5 @@
+// Setzt den GameState auf "Paused", wenn die Escape-Taste gedrückt wird.
+
 using UnityEngine;
 using Core.GameState;
 

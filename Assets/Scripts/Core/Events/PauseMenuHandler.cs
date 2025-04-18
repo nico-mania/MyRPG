@@ -1,3 +1,5 @@
+// Reagiert auf ein PauseEvent und friert das Spiel durch Setzen des TimeScale ein oder hebt es auf.
+
 using UnityEngine;
 using Core;
 using Core.Events;
@@ -8,6 +10,7 @@ namespace UI
     public class PauseMenuHandler : MonoBehaviour, IInitializable
     {
         private IEventBus _eventBus;
+        private bool _isPaused = false;
 
         public void Initialize()
         {
@@ -17,15 +20,13 @@ namespace UI
 
         private void OnDestroy()
         {
-            if (_eventBus != null)
-            {
-                _eventBus.Unsubscribe<PauseEvent>(OnPauseEvent);
-            }
+            _eventBus?.Unsubscribe<PauseEvent>(OnPauseEvent);
         }
 
         private void OnPauseEvent(PauseEvent e)
         {
-            Debug.Log("PauseMenuHandler received PauseEvent");
+            _isPaused = !_isPaused;
+            Time.timeScale = _isPaused ? 0f : 1f;
         }
     }
 }

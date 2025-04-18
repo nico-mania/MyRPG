@@ -1,3 +1,5 @@
+// Registriert globale Services im ServiceLocator und initialisiert alle IInitializable-Komponenten in der Szene.
+
 using UnityEngine;
 using Core;
 using Core.Events;
@@ -10,8 +12,7 @@ public class GameBootstrapper : MonoBehaviour
         ServiceLocator.Register<IGameStateService>(new GameStateService());
         ServiceLocator.Register<IEventBus>(new EventBus());
 
-        // Suche alle Initializables, auch inaktive
-        var all = UnityEngine.Object.FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+        var all = Object.FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
 
         foreach (var behaviour in all)
         {

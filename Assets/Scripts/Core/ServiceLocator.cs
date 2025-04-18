@@ -1,4 +1,5 @@
-// Core/Services/ServiceLocator.cs
+// Statische zentrale Registry für globale Services. Ermöglicht Registrierung, Abfrage und Rücksetzen von Service-Instanzen zur Laufzeit.
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,5 +31,8 @@ public static class ServiceLocator
         throw new Exception($"Service of type {type} not found.");
     }
 
-    public static void Clear() => _services.Clear();
+    public static void Clear()
+    {
+        _services.Clear();
+    }
 }

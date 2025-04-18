@@ -1,3 +1,5 @@
+// Verwalten des aktuellen GameStates innerhalb des Spiels. Ermöglicht das Setzen und Abfragen des Zustands.
+
 using UnityEngine;
 
 namespace Core.GameState
@@ -11,7 +13,6 @@ namespace Core.GameState
             if (CurrentState != newState)
             {
                 CurrentState = newState;
-                Debug.Log($"GameState changed to: {CurrentState}");
             }
         }
     }
