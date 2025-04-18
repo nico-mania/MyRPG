@@ -53,7 +53,9 @@ namespace Player.Controller
 
         public void Move(Vector3 direction)
         {
-            Vector3 movement = direction * moveSpeed * Time.fixedDeltaTime;
+            Vector3 worldDirection = transform.TransformDirection(direction);
+
+            Vector3 movement = worldDirection * moveSpeed * Time.fixedDeltaTime;
             _rb.MovePosition(_rb.position + movement);
         }
 

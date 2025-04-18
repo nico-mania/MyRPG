@@ -11,6 +11,8 @@ namespace Player.Input
         private PlayerInputActions _actions;
         private GroundChecker _groundChecker;
 
+        [SerializeField] private float turnThreshold = 0.5f;
+
         private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
@@ -39,6 +41,18 @@ namespace Player.Input
           
             bool isJumping = !_groundChecker.IsGrounded;
             _animator.SetBool("IsRunJumping", isJumping);
+            _animator.SetBool("IsStandJumping", isJumping);
+
+            // Mausbewegung horizontal (für Drehung)
+            Vector2 lookDelta = _actions.Player.Look.ReadValue<Vector2>();
+            float horizontalLook = lookDelta.x;
+
+            // Turn nur wenn Charakter stillsteht
+            bool turnLeft = horizontalLook < -turnThreshold;
+            bool turnRight = horizontalLook > turnThreshold;
+
+            _animator.SetBool("IsTurningLeft", turnLeft);
+            _animator.SetBool("IsTurningRight", turnRight);
         }
     }
 }
